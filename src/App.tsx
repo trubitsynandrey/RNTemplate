@@ -1,16 +1,41 @@
 import React from 'react'
+import {
+  ApolloClient,
+  ApolloProvider,
+  gql,
+  InMemoryCache,
+  useQuery,
+} from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 
 import { RootNavigation } from 'src/navigation/root'
 
 import { AlertProvider } from './modules/alert-context'
 
+const client = new ApolloClient({
+  uri: 'https://rickandmortyapi.com/graphql',
+  cache: new InMemoryCache(),
+})
+
+export const CHARACTERS = gql`
+  query GetCharacters {
+    characters {
+      results {
+        id
+        name
+      }
+    }
+  }
+`
+
 export const App = () => {
   return (
-    <AlertProvider>
-      <NavigationContainer>
-        <RootNavigation />
-      </NavigationContainer>
-    </AlertProvider>
+    <ApolloProvider client={client}>
+      <AlertProvider>
+        <NavigationContainer>
+          <RootNavigation />
+        </NavigationContainer>
+      </AlertProvider>
+    </ApolloProvider>
   )
 }
