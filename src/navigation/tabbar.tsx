@@ -19,6 +19,7 @@ export const TabBar = () => {
       <Tab.Navigator
         initialRouteName={Routes.CharacterScreen}
         screenOptions={{
+          tabBarShowLabel: true,
           tabBarStyle: {
             backgroundColor: 'rgba(248, 248, 248, 0.92)',
           },
@@ -27,7 +28,8 @@ export const TabBar = () => {
           name={Routes.CharacterScreen}
           component={CharacterScreen}
           options={{
-            headerTitle: 'Characters',
+            title: 'Character',
+            headerTitle: 'Character',
             tabBarIcon: ({ focused }) => <CharacterIcon focused={focused} />,
           }}
         />
@@ -35,6 +37,8 @@ export const TabBar = () => {
           name={Routes.LocationScreen}
           component={LocationScreen}
           options={{
+            title: 'Location',
+            headerTitle: 'Location',
             tabBarIcon: ({ focused }) => <LocationIcon focused={focused} />,
           }}
         />
@@ -42,6 +46,7 @@ export const TabBar = () => {
           name={Routes.EpisodeScreen}
           component={EpisodeScreen}
           options={{
+            title: 'Episode',
             headerTitle: 'Episode',
             tabBarIcon: ({ focused }) => <EpisodeIcon focused={focused} />,
           }}
