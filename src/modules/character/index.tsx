@@ -5,9 +5,14 @@ import styled from 'styled-components'
 
 import { CHARACTERS } from 'src/App'
 
-const CharacterCard = styled(View)`
-  width: 60px;
-  height: 60px;
+import { CharacterCard } from './character-card'
+
+const CardsContainer = styled(View)`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 9px;
 `
 
 export const CharacterScreen = () => {
@@ -16,14 +21,19 @@ export const CharacterScreen = () => {
   // console.log(error)
 
   // const ErrorView = error && <Text>Yo its error</Text>
+  if (loading) {
+    return <Text>Loading...</Text>
+  }
 
   return (
-    <View>
+    <CardsContainer>
       {data?.characters.results.map(item => (
-        <CharacterCard key={item.id}>
-          <Text>{item.name}</Text>
-        </CharacterCard>
+        <CharacterCard
+          characterName={item.name}
+          imageSrc={item.image}
+          key={item.id}
+        />
       ))}
-    </View>
+    </CardsContainer>
   )
 }
