@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import styled from 'styled-components/native'
 
 import { useAlertContext } from 'src/modules/alert-context'
+import { colors } from 'src/theme/colors'
 
 import { Button } from './button'
 
@@ -15,7 +16,7 @@ const Wrapper = styled.View`
   align-items: center;
   justify-content: center;
 
-  background-color: #ffffff36;
+  background-color: ${colors.white};
 `
 const AlertView = styled(View)`
   padding: 24px;

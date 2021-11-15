@@ -1,13 +1,13 @@
 import React from 'react'
-import { Text, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { CharacterScreen } from 'src/modules/character'
 import { EpisodeScreen } from 'src/modules/episode'
 import { LocationScreen } from 'src/modules/location'
-import { CharacterIcon } from 'src/ui/icons/character-icon'
-import { EpisodeIcon } from 'src/ui/icons/episode-icon'
-import { LocationIcon } from 'src/ui/icons/location-icon'
+import { colors } from 'src/theme/colors'
+import { CharacterIcon } from 'src/ui/icons/character-icon/character-icon'
+import { EpisodeIcon } from 'src/ui/icons/episode-icon/episode-icon'
+import { LocationIcon } from 'src/ui/icons/location-icon/location-icon'
 
 import { Routes } from './routes'
 
@@ -21,7 +21,7 @@ export const TabBar = () => {
         screenOptions={{
           tabBarShowLabel: true,
           tabBarStyle: {
-            backgroundColor: 'rgba(248, 248, 248, 0.92)',
+            backgroundColor: colors.tapBarColor,
           },
         }}>
         <Tab.Screen
