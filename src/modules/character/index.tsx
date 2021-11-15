@@ -1,39 +1,40 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { FlatList, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
 
 import { CHARACTERS } from 'src/App'
+import { colors } from 'src/theme/colors'
 
 import { CharacterCard } from './character-card'
 
-const CardsContainer = styled(View)`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+const CardsContainer = styled(SafeAreaView)`
   padding: 9px;
+  background: ${colors.white};
 `
 
 export const CharacterScreen = () => {
-  const { loading, error, data } = useQuery(CHARACTERS)
-  console.log(data?.characters.results[0])
-  // console.log(error)
+  const { loading, data } = useQuery(CHARACTERS)
 
-  // const ErrorView = error && <Text>Yo its error</Text>
   if (loading) {
     return <Text>Loading...</Text>
   }
 
   return (
     <CardsContainer>
-      {data?.characters.results.map(item => (
-        <CharacterCard
-          characterName={item.name}
-          imageSrc={item.image}
-          key={item.id}
-        />
-      ))}
+      <FlatList
+        data={data.characters.results}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <CharacterCard
+            characterName={item.name}
+            imageSrc={item.image}
+            status={item.status}
+            key={item.id}
+          />
+        )}
+        keyExtractor={item => item.id}
+      />
     </CardsContainer>
   )
 }

@@ -24,6 +24,7 @@ export const CHARACTERS = gql`
         id
         name
         image
+        status
       }
     }
   }
