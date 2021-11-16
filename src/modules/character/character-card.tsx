@@ -4,6 +4,8 @@ import styled from 'styled-components'
 
 import { colors } from 'src/theme/colors'
 
+import { CardProps } from './types'
+
 const CharacterContainer = styled(View)`
   width: 163px;
   height: 220px;
@@ -40,7 +42,11 @@ const CharStatus = styled(Text)`
   color: ${colors.charStatus};
 `
 
-export const CharacterCard = ({ imageSrc, characterName, status }) => {
+export const CharacterCard = ({
+  imageSrc,
+  characterName,
+  status,
+}: CardProps) => {
   return (
     <CharacterContainer>
       <CharImg source={{ uri: imageSrc }} />
