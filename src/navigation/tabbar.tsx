@@ -9,6 +9,7 @@ import { CharacterIcon } from 'src/ui/icons/character-icon/character-icon'
 import { EpisodeIcon } from 'src/ui/icons/episode-icon/episode-icon'
 import { LocationIcon } from 'src/ui/icons/location-icon/location-icon'
 
+import { CustomHeader } from './custom-header'
 import { Routes } from './routes'
 
 const Tab = createBottomTabNavigator()
@@ -29,7 +30,7 @@ export const TabBar = () => {
           component={CharacterScreen}
           options={{
             title: 'Character',
-            headerTitle: 'Character',
+            headerTitle: () => <CustomHeader title={'Character'} />,
             tabBarIcon: ({ focused }) => <CharacterIcon focused={focused} />,
           }}
         />
@@ -38,7 +39,7 @@ export const TabBar = () => {
           component={LocationScreen}
           options={{
             title: 'Location',
-            headerTitle: 'Location',
+            headerTitle: () => <CustomHeader title={'Location'} />,
             tabBarIcon: ({ focused }) => <LocationIcon focused={focused} />,
           }}
         />
@@ -47,7 +48,7 @@ export const TabBar = () => {
           component={EpisodeScreen}
           options={{
             title: 'Episode',
-            headerTitle: 'Episode',
+            headerTitle: () => <CustomHeader title={'Episode'} />,
             tabBarIcon: ({ focused }) => <EpisodeIcon focused={focused} />,
           }}
         />
