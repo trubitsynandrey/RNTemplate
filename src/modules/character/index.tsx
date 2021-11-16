@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 import { CHARACTERS } from 'src/App'
 import { colors } from 'src/theme/colors'
+import { Query } from 'src/types'
 
 import { CharacterCard } from './character-card'
 
@@ -14,7 +15,7 @@ const CardsContainer = styled(SafeAreaView)`
 `
 
 export const CharacterScreen = () => {
-  const { loading, data } = useQuery(CHARACTERS)
+  const { loading, data } = useQuery<Query>(CHARACTERS)
 
   if (loading) {
     return <Text>Loading...</Text>
@@ -33,7 +34,7 @@ export const CharacterScreen = () => {
             key={item.id}
           />
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
       />
     </CardsContainer>
   )

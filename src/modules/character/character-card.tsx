@@ -35,6 +35,7 @@ const CharName = styled(Text)`
   font-size: 17px;
 `
 const CharStatus = styled(Text)`
+  font-family: 'Roboto-Regular';
   font-size: 11px;
   color: ${colors.charStatus};
 `
@@ -42,7 +43,7 @@ const CharStatus = styled(Text)`
 export const CharacterCard = ({ imageSrc, characterName, status }) => {
   return (
     <CharacterContainer>
-      <CharImg resizeMode={'cover'} source={{ uri: imageSrc }} />
+      <CharImg source={{ uri: imageSrc }} />
       <DescriptionContainer>
         <CharStatus>{status}</CharStatus>
         <CharName>{characterName}</CharName>
