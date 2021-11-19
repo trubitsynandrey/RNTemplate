@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { View } from 'react-native'
 import Modal from 'react-native-modal'
+import { View } from "react-native"
 import styled from 'styled-components/native'
 
 interface IModalMenu {
