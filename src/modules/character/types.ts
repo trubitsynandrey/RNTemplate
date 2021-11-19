@@ -1,5 +1,5 @@
 export interface CardProps {
   imageSrc: string
   characterName: string
-  status: boolean
+  status: string
 }

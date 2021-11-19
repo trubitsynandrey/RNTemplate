@@ -3,9 +3,10 @@ import { FlatList, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
 
-import { CHARACTERS } from 'src/App'
+import { useGetCharVarQuery } from 'src/generated/graphql'
+import { useGetCharactersQuery } from 'src/generated/graphql'
+import { CHARACTERS } from 'src/queries/queries'
 import { colors } from 'src/theme/colors'
-import { Query } from 'src/types'
 
 import { CharacterCard } from './character-card'
 
@@ -15,7 +16,12 @@ const CardsContainer = styled(SafeAreaView)`
 `
 
 export const CharacterScreen = () => {
-  const { loading, data } = useQuery<Query>(CHARACTERS)
+  // const { loading, data } = useGetCharactersQuery()
+  const { data, loading } = useGetCharVarQuery({
+    variables: {
+      page: 5,
+    },
+  })
 
   if (loading) {
     return <Text>Loading...</Text>
@@ -24,7 +30,7 @@ export const CharacterScreen = () => {
   return (
     <CardsContainer>
       <FlatList
-        data={data.characters.results}
+        data={data?.characters.results}
         numColumns={2}
         renderItem={({ item }) => (
           <CharacterCard

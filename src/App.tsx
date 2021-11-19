@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  ApolloClient,
-  ApolloProvider,
-  gql,
-  InMemoryCache,
-  useQuery,
-} from '@apollo/client'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 
 import { RootNavigation } from 'src/navigation/root'
@@ -16,19 +10,6 @@ const client = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql',
   cache: new InMemoryCache(),
 })
-
-export const CHARACTERS = gql`
-  query GetCharacters {
-    characters {
-      results {
-        id
-        name
-        image
-        status
-      }
-    }
-  }
-`
 
 export const App = () => {
   return (
