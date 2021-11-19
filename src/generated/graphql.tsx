@@ -233,6 +233,22 @@ export type GetCharVarQuery = {
   }
 }
 
+export type GetEpisodesQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetEpisodesQuery = {
+  __typename?: 'Query'
+  episodes: {
+    __typename?: 'Episodes'
+    results: Array<{
+      __typename?: 'Episode'
+      id: string
+      episode: string
+      name: string
+      air_date: string
+    }>
+  }
+}
+
 export const GetCharactersDocument = gql`
   query GetCharacters {
     characters {
@@ -334,11 +350,13 @@ export function useGetCharVarQuery(
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions }
+
   return Apollo.useQuery<GetCharVarQuery, GetCharVarQueryVariables>(
     GetCharVarDocument,
     options,
   )
 }
+
 export function useGetCharVarLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetCharVarQuery,
@@ -346,6 +364,7 @@ export function useGetCharVarLazyQuery(
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions }
+
   return Apollo.useLazyQuery<GetCharVarQuery, GetCharVarQueryVariables>(
     GetCharVarDocument,
     options,
@@ -358,4 +377,67 @@ export type GetCharVarLazyQueryHookResult = ReturnType<
 export type GetCharVarQueryResult = Apollo.QueryResult<
   GetCharVarQuery,
   GetCharVarQueryVariables
+>
+export const GetEpisodesDocument = gql`
+  query GetEpisodes {
+    episodes {
+      results {
+        id
+        episode
+        name
+        air_date
+      }
+    }
+  }
+`
+
+/**
+ * __useGetEpisodesQuery__
+ *
+ * To run a query within a React component, call `useGetEpisodesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEpisodesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEpisodesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetEpisodesQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetEpisodesQuery,
+    GetEpisodesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useQuery<GetEpisodesQuery, GetEpisodesQueryVariables>(
+    GetEpisodesDocument,
+    options,
+  )
+}
+
+export function useGetEpisodesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetEpisodesQuery,
+    GetEpisodesQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useLazyQuery<GetEpisodesQuery, GetEpisodesQueryVariables>(
+    GetEpisodesDocument,
+    options,
+  )
+}
+export type GetEpisodesQueryHookResult = ReturnType<typeof useGetEpisodesQuery>
+export type GetEpisodesLazyQueryHookResult = ReturnType<
+  typeof useGetEpisodesLazyQuery
+>
+export type GetEpisodesQueryResult = Apollo.QueryResult<
+  GetEpisodesQuery,
+  GetEpisodesQueryVariables
 >

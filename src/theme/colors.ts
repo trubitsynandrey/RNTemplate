@@ -1,9 +1,11 @@
 export const colors = {
   white: '#ffffff',
-  black: '#000000',
+  black: '#081f32',
   purple: '#5856D6',
   grey: '#A3A3A3',
   tapBarColor: 'rgba(248, 248, 248, 0.92)',
   charBorder: '#efeff4',
   charStatus: '#6e798c',
+  greyBold: '#8e8e93',
+  greyArrow: '#c7c7cc',
 }

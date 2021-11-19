@@ -24,3 +24,16 @@ export const CHARACTERSBYPAGE = gql`
     }
   }
 `
+
+export const EPISODES = gql`
+  query GetEpisodes {
+    episodes {
+      results {
+        id
+        episode
+        name
+        air_date
+      }
+    }
+  }
+`
