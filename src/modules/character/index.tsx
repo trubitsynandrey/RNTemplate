@@ -1,18 +1,19 @@
 import React from 'react'
-import { FlatList, SafeAreaView, ScrollView, Text, View } from 'react-native'
-import { useQuery } from '@apollo/client'
+import { FlatList, SafeAreaView, Text } from 'react-native'
 import styled from 'styled-components'
 
 import { useGetCharVarQuery } from 'src/generated/graphql'
 import { useGetCharactersQuery } from 'src/generated/graphql'
-import { CHARACTERS } from 'src/queries/queries'
 import { colors } from 'src/theme/colors'
 
 import { CharacterCard } from './character-card'
 
 const CardsContainer = styled(SafeAreaView)`
-  padding: 9px;
+  padding-top: 20px;
   background: ${colors.white};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const CharacterScreen = () => {

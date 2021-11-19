@@ -6,10 +6,11 @@ import { colors } from 'src/theme/colors'
 
 const FilterButtonContainer = styled(TouchableOpacity)``
 const ButtonText = styled(Text)`
-  font-family: 'Roboto-Black'
+  font-family: 'Roboto-Black';
   font-size: 17px;
   color: ${colors.purple};
 `
+
 const HeaderContainer = styled(View)`
   width: 100%;
   height: 100%;
@@ -20,12 +21,15 @@ const HeaderContainer = styled(View)`
   background-color: ${colors.tapBarColor};
 `
 const TitleRouter = styled(Text)`
-  font-family: 'Roboto-Bold'
+  font-family: 'Roboto-Bold';
   font-size: 30px;
   margin-top: auto;
 `
+interface CustomHeaderProps {
+  title: string
+}
 
-export const CustomHeader = ({ title }) => {
+export const CustomHeader = ({ title }: CustomHeaderProps) => {
   return (
     <HeaderContainer>
       <TitleRouter>{title}</TitleRouter>
