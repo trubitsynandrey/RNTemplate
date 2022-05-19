@@ -4,7 +4,11 @@ import styled from 'styled-components'
 
 import { colors } from 'src/theme/colors'
 
-const FilterButtonContainer = styled(TouchableOpacity)``
+const FilterButtonContainer = styled(TouchableOpacity)`
+  position: absolute;
+  right: 16px;
+  top: 60px;
+`
 const ButtonText = styled(Text)`
   font-family: 'Roboto-Black';
   font-size: 17px;
@@ -12,12 +16,13 @@ const ButtonText = styled(Text)`
 `
 
 const HeaderContainer = styled(View)`
-  width: 100%;
-  height: 100%;
   display: flex;
-  padding-top: 5px;
+  padding-left: 16;
+  padding-top: 90px;
+  padding-bottom: 10px;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
   background-color: ${colors.tapBarColor};
 `
 const TitleRouter = styled(Text)`
