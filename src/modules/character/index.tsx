@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, SafeAreaView, Text } from 'react-native'
+import { FlatList, SafeAreaView, StatusBar, Text } from 'react-native'
 import styled from 'styled-components'
 
 import { useGetCharVarQuery } from 'src/generated/graphql'
@@ -17,7 +17,6 @@ const CardsContainer = styled(SafeAreaView)`
 `
 
 export const CharacterScreen = () => {
-  // const { loading, data } = useGetCharactersQuery()
   const { data, loading } = useGetCharVarQuery({
     variables: {
       page: 5,
@@ -29,20 +28,23 @@ export const CharacterScreen = () => {
   }
 
   return (
-    <CardsContainer>
-      <FlatList
-        data={data?.characters.results}
-        numColumns={2}
-        renderItem={({ item }) => (
-          <CharacterCard
-            characterName={item.name}
-            imageSrc={item.image}
-            status={item.status}
-            key={item.id}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    </CardsContainer>
+    <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar backgroundColor={'#61dafb'} />
+      <CardsContainer>
+        <FlatList
+          data={data?.characters.results}
+          numColumns={2}
+          renderItem={({ item }) => (
+            <CharacterCard
+              characterName={item.name}
+              imageSrc={item.image}
+              status={item.status}
+              key={item.id}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </CardsContainer>
+    </SafeAreaView>
   )
 }

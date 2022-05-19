@@ -7,6 +7,7 @@ import { colors } from 'src/theme/colors'
 import { CardProps } from './types'
 
 const CharacterContainer = styled(View)`
+  padding-top: 9px;
   width: 163px;
   height: 220px;
   margin-bottom: 20px;

@@ -1,4 +1,5 @@
 import React from 'react'
+import { StatusBar } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { useAlertContext } from 'src/modules/alert-context'
@@ -14,8 +15,11 @@ export const RootNavigation = () => {
 
   return (
     <React.Fragment>
+      <StatusBar backgroundColor={'#000'} />
       <Stack.Navigator
-        screenOptions={{ headerShown: false }}
+        screenOptions={{
+          headerShown: false,
+        }}
         initialRouteName={Routes.MainNavigator}>
         <Stack.Screen name={Routes.MainNavigator} component={TabBar} />
       </Stack.Navigator>

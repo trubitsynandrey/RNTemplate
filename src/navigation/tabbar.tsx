@@ -1,4 +1,5 @@
 import React from 'react'
+import { StatusBar } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { CharacterScreen } from 'src/modules/character'
@@ -30,7 +31,7 @@ export const TabBar = () => {
           component={CharacterScreen}
           options={{
             title: 'Character',
-            headerTitle: () => <CustomHeader title={'Character'} />,
+            header: () => <CustomHeader title={'Character'} />,
             tabBarIcon: ({ focused }) => <CharacterIcon focused={focused} />,
           }}
         />
@@ -39,7 +40,7 @@ export const TabBar = () => {
           component={LocationScreen}
           options={{
             title: 'Location',
-            headerTitle: () => <CustomHeader title={'Location'} />,
+            header: () => <CustomHeader title={'Location'} />,
             tabBarIcon: ({ focused }) => <LocationIcon focused={focused} />,
           }}
         />
