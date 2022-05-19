@@ -24,3 +24,15 @@ export const CHARACTERSBYPAGE = gql`
     }
   }
 `
+
+export const GETLOCATION = gql`
+  query GetLocations {
+    locations {
+      results {
+        id
+        name
+        type
+      }
+    }
+  }
+`

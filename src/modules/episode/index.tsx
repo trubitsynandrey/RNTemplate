@@ -1,10 +1,11 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { FlatList, SafeAreaView, Text, View } from 'react-native'
+import { useGetLocaitonsQuery } from 'src/generated/graphql'
 
 export const EpisodeScreen = () => {
   return (
     <View>
-      <Text>Episode</Text>
+      <Text>Episode Screen</Text>
     </View>
   )
 }

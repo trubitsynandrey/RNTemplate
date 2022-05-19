@@ -233,6 +233,21 @@ export type GetCharVarQuery = {
   }
 }
 
+export type GetLocationsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetLocationsQuery = {
+  __typename?: 'Query'
+  locations: {
+    __typename?: 'Locations'
+    results: Array<{
+      __typename?: 'Location'
+      id: string
+      name: string
+      type: string
+    }>
+  }
+}
+
 export const GetCharactersDocument = gql`
   query GetCharacters {
     characters {
@@ -334,11 +349,13 @@ export function useGetCharVarQuery(
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions }
+
   return Apollo.useQuery<GetCharVarQuery, GetCharVarQueryVariables>(
     GetCharVarDocument,
     options,
   )
 }
+
 export function useGetCharVarLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     GetCharVarQuery,
@@ -346,6 +363,7 @@ export function useGetCharVarLazyQuery(
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions }
+
   return Apollo.useLazyQuery<GetCharVarQuery, GetCharVarQueryVariables>(
     GetCharVarDocument,
     options,
@@ -358,4 +376,68 @@ export type GetCharVarLazyQueryHookResult = ReturnType<
 export type GetCharVarQueryResult = Apollo.QueryResult<
   GetCharVarQuery,
   GetCharVarQueryVariables
+>
+export const GetLocationsDocument = gql`
+  query GetLocations {
+    locations {
+      results {
+        id
+        name
+        type
+      }
+    }
+  }
+`
+
+/**
+ * __useGetLocationsQuery__
+ *
+ * To run a query within a React component, call `useGetLocationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLocationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLocationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetLocationsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetLocationsQuery,
+    GetLocationsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useQuery<GetLocationsQuery, GetLocationsQueryVariables>(
+    GetLocationsDocument,
+    options,
+  )
+}
+
+export function useGetLocationsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetLocationsQuery,
+    GetLocationsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+
+  return Apollo.useLazyQuery<GetLocationsQuery, GetLocationsQueryVariables>(
+    GetLocationsDocument,
+    options,
+  )
+}
+export type GetLocationsQueryHookResult = ReturnType<
+  typeof useGetLocationsQuery
+>
+export type GetLocationsLazyQueryHookResult = ReturnType<
+  typeof useGetLocationsLazyQuery
+>
+export type GetLocationsQueryResult = Apollo.QueryResult<
+  GetLocationsQuery,
+  GetLocationsQueryVariables
 >
