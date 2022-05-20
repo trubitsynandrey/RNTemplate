@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 
 import { RootNavigation } from 'src/navigation/root'
 
-import { GetCharVarQuery } from './generated/graphql'
+import { Characters } from './generated/graphql'
 import { AlertProvider } from './modules/alert-context'
 
 const client = new ApolloClient({
@@ -15,16 +15,13 @@ const client = new ApolloClient({
         fields: {
           characters: {
             keyArgs: [],
-            merge(existing = [], incoming) {
-              if (existing.length !== 0) {
-                console.log('merging', existing)
-
+            merge(existing: Characters, incoming: Characters) {
+              if (existing) {
                 return {
                   ...incoming,
                   results: [...existing.results, ...incoming.results],
                 }
               }
-              console.log('first', existing)
 
               return incoming
             },
