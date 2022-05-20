@@ -12,9 +12,13 @@ export const CHARACTERS = gql`
     }
   }
 `
+
 export const CHARACTERSBYPAGE = gql`
   query GetCharVar($page: Int) {
     characters(page: $page) {
+      info {
+        next
+      }
       results {
         id
         name
