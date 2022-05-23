@@ -2,7 +2,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { useAlertContext } from 'src/modules/alert-context'
-import { FilterModal } from 'src/modules/filter-modal'
+import { FilterScreen } from 'src/modules/filter/index'
 import { Alert } from 'src/ui/alert'
 
 import { Routes } from './routes'
@@ -20,9 +20,9 @@ export const RootNavigation = () => {
           headerShown: false,
         }}
         initialRouteName={Routes.MainNavigator}>
-        {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
-          <Stack.Screen name={Routes.FilterModal} component={FilterModal} />
-        </Stack.Group> */}
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen name={Routes.FilterModal} component={FilterScreen} />
+        </Stack.Group>
         <Stack.Group>
           <Stack.Screen name={Routes.MainNavigator} component={TabBar} />
         </Stack.Group>

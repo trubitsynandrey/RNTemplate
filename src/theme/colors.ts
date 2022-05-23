@@ -6,4 +6,5 @@ export const colors = {
   tapBarColor: 'rgba(248, 248, 248, 0.92)',
   charBorder: '#efeff4',
   charStatus: '#6e798c',
+  inputDescription: '#6E798C',
 }
