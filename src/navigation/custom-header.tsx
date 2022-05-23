@@ -17,7 +17,7 @@ const ButtonText = styled(Text)`
 
 const HeaderContainer = styled(View)`
   display: flex;
-  padding-left: 16;
+  padding-left: 16px;
   padding-top: 90px;
   padding-bottom: 10px;
   flex-direction: row;

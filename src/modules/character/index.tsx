@@ -17,11 +17,9 @@ const CardsContainer = styled(SafeAreaView)`
 `
 
 export const CharacterScreen = () => {
-  const { data, loading } = useGetCharVarQuery({
-    variables: {
-      page: 5,
-    },
-  })
+  const { data, loading, fetchMore } = useGetCharVarQuery()
+
+  const page = data?.characters.info.next
 
   if (loading) {
     return <Text>Loading...</Text>
@@ -33,7 +31,16 @@ export const CharacterScreen = () => {
       <CardsContainer>
         <FlatList
           data={data?.characters.results}
+          keyExtractor={(item) => item.id}
           numColumns={2}
+          onEndReached={() => {
+            console.log('reached')
+            fetchMore({
+              variables: {
+                page,
+              },
+            })
+          }}
           renderItem={({ item }) => (
             <CharacterCard
               characterName={item.name}
@@ -42,7 +49,6 @@ export const CharacterScreen = () => {
               key={item.id}
             />
           )}
-          keyExtractor={(item) => item.id}
         />
       </CardsContainer>
     </SafeAreaView>
