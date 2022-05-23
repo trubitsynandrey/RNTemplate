@@ -8,33 +8,27 @@ interface Props {
   isChecked: boolean
 }
 
-const CheckBoxItem = styled(TouchableOpacity)<Props>`
+const CheckBoxItem = styled(TouchableOpacity) <Props>`
   width: 24px;
   height: 24px;
   border: 1.5px solid
-    ${(props) => (props.isChecked ? colors.purple : colors.grey)};
+    ${(props) => (props.isChecked ? colors.purple : colors.grey[0])};
   border-radius: 11px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 `
-const InnerCircle = styled(View)<Props>`
+const InnerCircle = styled(View) <Props>`
   width: 14px;
   height: 14px;
   border-radius: 7px;
   background-color: ${(props) => (props.isChecked ? colors.purple : '0')};
 `
 
-export const Checkbox = () => {
-  const [isChecked, setIsChecked] = useState(false)
-
-  const handleOnPress = () => {
-    setIsChecked(!isChecked)
-  }
-
+export const Checkbox = ({ isChecked }: { isChecked: boolean }) => {
   return (
-    <CheckBoxItem isChecked={isChecked} onPress={handleOnPress}>
+    <CheckBoxItem isChecked={isChecked}>
       <InnerCircle isChecked={isChecked} />
     </CheckBoxItem>
   )

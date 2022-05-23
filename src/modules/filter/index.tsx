@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Alert, SectionList, Text, TouchableOpacity, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components'
 
 import { colors } from 'src/theme/colors'
 
 import { InputButton } from './InputButton'
+import { SelectorList } from './selector-list'
 
 const FilterHeadContainer = styled(View)`
   margin-bottom: 10px;
@@ -38,17 +38,34 @@ const ApplyButtonText = styled(Text)`
   font-size: 12px;
   color: ${colors.white};
 `
-const Separator = styled(View)`
+const Separator = styled(View) <{ isTitle?: boolean }>`
   border-bottom-width: 1px;
   border-style: solid;
-  border-color: ${colors.grey};
-  width: 88%;
+  border-color: ${colors.grey[0]};
+  width: ${(props) => (props.isTitle ? '100%' : '85 %')};
   margin-left: auto;
 `
 
-const data = [{ title: 'Status', data: ['Alive', 'Dead', 'Unknown'] }]
+const Title = styled(Text)`
+  font-family: 'Roboto';
+  color: ${colors.grey[0]};
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  margin-left: 16px;
+  margin-bottom: 8.5px;
+`
+
+const dataStatus = [{ title: 'Status', data: ['Alive', 'Dead', 'Unknown'] }]
+const dataGender = [
+  { title: 'Gender', data: ['Female', 'Male', 'Genderless', 'Unknown'] },
+]
+const dataState = ['Alive', 'Dead', 'Unknown']
 
 export const FilterScreen = () => {
+  const [status, setType] = useState('')
+  const [gender, setGender] = useState('')
+
   return (
     <>
       <FilterHeadContainer>
@@ -59,11 +76,17 @@ export const FilterScreen = () => {
       </FilterHeadContainer>
       <InputButton name="Name" description="Give a name" />
       <InputButton name="Species" description="Enter species" />
-      <SectionList
-        sections={data}
-        keyExtractor={(item, index) => item + index}
-        renderItem={({ item }) => <InputButton name={item} isCheckType />}
-        ItemSeparatorComponent={() => <Separator />}
+      <SelectorList
+        data={dataStatus}
+        onSelect={(item) => setType(item)}
+        value={status}
+        headerStyle={{ marginTop: 20 }}
+      />
+      <SelectorList
+        data={dataGender}
+        onSelect={(item) => setGender(item)}
+        value={gender}
+        headerStyle={{ marginTop: 20 }}
       />
     </>
   )
