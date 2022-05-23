@@ -20,7 +20,6 @@ export const CharacterScreen = () => {
   const { data, loading, fetchMore } = useGetCharVarQuery()
 
   const page = data?.characters.info.next
-  console.log(data)
 
   if (loading) {
     return <Text>Loading...</Text>
