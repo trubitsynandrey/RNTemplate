@@ -1,8 +1,10 @@
 import React from 'react'
-import { Button, Image, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import styled from 'styled-components'
 
 import { colors } from 'src/theme/colors'
+
+import { Routes, useNavigation } from './routes'
 
 const FilterButtonContainer = styled(TouchableOpacity)`
   position: absolute;
@@ -35,10 +37,12 @@ interface CustomHeaderProps {
 }
 
 export const CustomHeader = ({ title }: CustomHeaderProps) => {
+  const { navigate } = useNavigation()
+
   return (
     <HeaderContainer>
       <TitleRouter>{title}</TitleRouter>
-      <FilterButtonContainer>
+      <FilterButtonContainer onPress={() => navigate(Routes.FilterModal)}>
         <ButtonText>Filter</ButtonText>
       </FilterButtonContainer>
     </HeaderContainer>
