@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import styled from 'styled-components'
 
+import { Routes, useNavigation } from 'src/navigation/routes'
 import { colors } from 'src/theme/colors'
 import { Checkbox } from 'src/ui/checkbox'
 
-const NameButton = styled(TouchableOpacity) <{ hideBorder?: boolean }>`
+const NameButton = styled(TouchableOpacity)<{ hideBorder?: boolean }>`
   margin-top: ${(props) => (props.hideBorder ? '0' : '20px')};
   display: flex;
   flex-direction: row;
@@ -50,12 +51,16 @@ export const InputButton = ({
   setValue,
   value,
 }: InputButtonProps) => {
-  // const [isChecked, setIsChecked] = useState(false)
-
   const handleOnPress = () => {
     // setIsChecked(!isChecked)
     setValue(name)
   }
+
+  const handleNavigate = () => {
+    navigate(Routes.InputModal, { name })
+  }
+
+  const { navigate } = useNavigation()
 
   const isChecked = value === name
 
@@ -69,8 +74,11 @@ export const InputButton = ({
   return (
     <NameButton
       hideBorder={isCheckType}
-      onPress={isCheckType ? handleOnPress : console.log('not implemented')}>
-      <Checkbox isChecked={isChecked} />
+      onPress={isCheckType ? handleOnPress : handleNavigate}>
+      <Checkbox
+        isChecked={isChecked}
+        onPress={isCheckType ? handleOnPress : console.log('not implemented')}
+      />
       <DescriptionButtonWrapper>
         {isCheckType ? (
           <CheckBoxName>{name}</CheckBoxName>

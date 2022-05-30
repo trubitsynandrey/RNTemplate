@@ -14,7 +14,7 @@ import { colors } from 'src/theme/colors'
 
 import { InputButton } from './InputButton'
 
-const Separator = styled(View) <{ isTitle?: boolean }>`
+export const Separator = styled(View)<{ isTitle?: boolean }>`
   border-bottom-width: 1px;
   border-style: solid;
   border-color: ${colors.grey[0]};

@@ -9,6 +9,7 @@ export enum Routes {
   MainNavigator = 'MainNavigator',
   LocationScreen = 'LocationScreen',
   FilterModal = 'FilterModal',
+  InputModal = 'InputModal',
 }
 
 export const useNavigation = () =>

@@ -26,9 +26,15 @@ const InnerCircle = styled(View) <Props>`
   background-color: ${(props) => (props.isChecked ? colors.purple : '0')};
 `
 
-export const Checkbox = ({ isChecked }: { isChecked: boolean }) => {
+export const Checkbox = ({
+  isChecked,
+  onPress,
+}: {
+  isChecked: boolean
+  onPress?: () => void
+}) => {
   return (
-    <CheckBoxItem isChecked={isChecked}>
+    <CheckBoxItem isChecked={isChecked} onPress={onPress}>
       <InnerCircle isChecked={isChecked} />
     </CheckBoxItem>
   )
