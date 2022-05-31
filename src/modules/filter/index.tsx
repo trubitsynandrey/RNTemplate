@@ -1,10 +1,7 @@
-import React, { useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import styled from 'styled-components'
+import React, { useCallback, useState } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 
-import { useNavigation } from 'src/navigation/routes'
-import { colors } from 'src/theme/colors'
-
+import { useCharacterFilterContext } from './filter-character-context'
 import { InputButton } from './InputButton'
 import { SelectorList } from './selector-list'
 
@@ -14,17 +11,43 @@ const dataGender = [
 ]
 
 export const FilterScreen = () => {
-  const [status, setType] = useState('')
-  const [gender, setGender] = useState('')
-  const { navigate } = useNavigation()
+  const { setGender, setStatus, gender, status, inputData } =
+    useCharacterFilterContext()
+  const [isNameChecked, setIsNameChecked] = useState(false)
+  const [isSpeciesChecked, setIsSpeciesChecked] = useState(false)
+  useFocusEffect(
+    useCallback(() => {
+      console.log('focus', inputData)
+
+      if (inputData.name !== '') {
+        setIsNameChecked(true)
+      }
+
+      if (inputData.species !== '') {
+        setIsSpeciesChecked(true)
+      }
+
+      return () => {
+        console.log('out')
+      }
+    }, [inputData]),
+  )
 
   return (
     <>
-      <InputButton name="Name" description="Give a name" />
-      <InputButton name="Species" description="Enter species" />
+      <InputButton
+        name="Name"
+        description="Give a name"
+        isInputValue={isNameChecked}
+      />
+      <InputButton
+        name="Species"
+        description="Enter species"
+        isInputValue={isSpeciesChecked}
+      />
       <SelectorList
         data={dataStatus}
-        onSelect={(item) => setType(item)}
+        onSelect={(item) => setStatus(item)}
         value={status}
         headerStyle={{ marginTop: 20 }}
       />

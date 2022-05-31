@@ -36,7 +36,9 @@ export const RootNavigation = () => {
             name={Routes.InputModal}
             component={InputScreen}
             options={{
-              header: () => <FilterHead isInput title={'Name'} />,
+              header: ({ route }) => (
+                <FilterHead isInput title={route.params.name} />
+              ),
               contentStyle: { backgroundColor: 'white' },
             }}
           />

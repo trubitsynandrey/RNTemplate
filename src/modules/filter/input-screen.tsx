@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
-import { useRoute } from '@react-navigation/native'
+import { useFocusEffect, useRoute } from '@react-navigation/native'
 import styled from 'styled-components/native'
 
-import { useNavigation } from 'src/navigation/routes'
 import { DictationIcon } from 'src/ui/icons/dictation-icon'
 import { SearchIcon } from 'src/ui/icons/search-icon'
 
-import { FilterHead } from './filter-header'
+import { useCharacterFilterContext } from './filter-character-context'
 import { Separator } from './selector-list'
 
 const InputWrapper = styled(View)`
@@ -23,23 +22,33 @@ const InputWrapper = styled(View)`
   background-color: rgba(118, 118, 128, 0.12);
 `
 interface Params {
-  name?: string
+  name?: 'species' | 'name'
 }
 
 export const InputScreen = () => {
-  const { setOptions } = useNavigation()
   const { params } = useRoute()
   const name = (params as Params)?.name
-  console.log('params name', name)
-  setOptions({
-    header: () => <FilterHead isInput title={name} />,
+  const value = name ? (name?.toLowerCase() as typeof name) : ''
+  const { inputData, setInputData } = useCharacterFilterContext()
+  const [inputValue, setInputValue] = useState(inputData[value])
+  useFocusEffect(() => {
+    return () => {
+      if (name) {
+        setInputData((prev) => Object.assign(prev, { [value]: inputValue }, {}))
+      }
+    }
   })
 
   return (
     <>
       <InputWrapper>
         <SearchIcon style={{ marginRight: 11 }} />
-        <TextInput style={styles.input} placeholder={'Search'} />
+        <TextInput
+          style={styles.input}
+          placeholder={'Search'}
+          onChangeText={setInputValue}
+          value={inputValue}
+        />
         <DictationIcon />
       </InputWrapper>
       <Separator isTitle style={{ marginTop: 8.5 }} />

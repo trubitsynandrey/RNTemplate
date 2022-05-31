@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import styled from 'styled-components/native'
 
-import { useNavigation } from 'src/navigation/routes'
+import { Routes, useNavigation } from 'src/navigation/routes'
 import { colors } from 'src/theme/colors'
 import { BackIcon } from 'src/ui/icons/back-icon'
 
@@ -24,7 +24,7 @@ const FilterTitle = styled(Text)`
 `
 
 const ApplyButton = styled(TouchableOpacity)`
-  right: 15;
+  right: 15px;
   position: absolute;
   width: 64px;
   height: 28px;
@@ -61,7 +61,7 @@ interface FilterHeadProps {
 }
 
 export const FilterHead = ({ isInput, title }: FilterHeadProps) => {
-  const { goBack } = useNavigation()
+  const { goBack, navigate } = useNavigation()
 
   return (
     <FilterHeadContainer>
@@ -73,7 +73,8 @@ export const FilterHead = ({ isInput, title }: FilterHeadProps) => {
       </LeftButton>
       <FilterTitle>{title}</FilterTitle>
       {!isInput && (
-        <ApplyButton onPress={() => goBack()}>
+        <ApplyButton
+          onPress={() => navigate(Routes.CharacterScreen, { filter: true })}>
           <ApplyButtonText>APPLY</ApplyButtonText>
         </ApplyButton>
       )}

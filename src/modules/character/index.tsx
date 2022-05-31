@@ -1,5 +1,6 @@
 import React from 'react'
 import { FlatList, SafeAreaView, StatusBar, Text } from 'react-native'
+import { useRoute } from '@react-navigation/native'
 import styled from 'styled-components'
 
 import { useGetCharVarQuery } from 'src/generated/graphql'
@@ -18,6 +19,8 @@ const CardsContainer = styled(SafeAreaView)`
 
 export const CharacterScreen = () => {
   const { data, loading, fetchMore } = useGetCharVarQuery()
+  const { params } = useRoute()
+  console.log(params)
 
   const page = data?.characters.info.next
 

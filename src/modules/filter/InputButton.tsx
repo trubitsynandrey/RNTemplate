@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import styled from 'styled-components'
 
@@ -42,6 +42,8 @@ interface InputButtonProps {
   isCheckType?: boolean
   value?: string
   setValue?: (item: string) => void
+  isInputValue?: boolean
+  setChecked?: () => void
 }
 
 export const InputButton = ({
@@ -50,6 +52,8 @@ export const InputButton = ({
   isCheckType,
   setValue,
   value,
+  isInputValue,
+  setChecked,
 }: InputButtonProps) => {
   const handleOnPress = () => {
     // setIsChecked(!isChecked)
@@ -76,7 +80,7 @@ export const InputButton = ({
       hideBorder={isCheckType}
       onPress={isCheckType ? handleOnPress : handleNavigate}>
       <Checkbox
-        isChecked={isChecked}
+        isChecked={isChecked || isInputValue}
         onPress={isCheckType ? handleOnPress : console.log('not implemented')}
       />
       <DescriptionButtonWrapper>
