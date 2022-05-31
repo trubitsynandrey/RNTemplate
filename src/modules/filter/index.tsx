@@ -17,18 +17,16 @@ export const FilterScreen = () => {
   const [isSpeciesChecked, setIsSpeciesChecked] = useState(false)
   useFocusEffect(
     useCallback(() => {
-      console.log('focus', inputData)
-
       if (inputData.name !== '') {
         setIsNameChecked(true)
+      } else {
+        setIsNameChecked(false)
       }
 
       if (inputData.species !== '') {
         setIsSpeciesChecked(true)
-      }
-
-      return () => {
-        console.log('out')
+      } else {
+        setIsSpeciesChecked(false)
       }
     }, [inputData]),
   )

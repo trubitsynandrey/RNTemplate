@@ -6,6 +6,8 @@ import { Routes, useNavigation } from 'src/navigation/routes'
 import { colors } from 'src/theme/colors'
 import { BackIcon } from 'src/ui/icons/back-icon'
 
+import { useCharacterFilterContext } from './filter-character-context'
+
 const FilterHeadContainer = styled(View)`
   justify-content: center;
   align-items: center;
@@ -61,20 +63,31 @@ interface FilterHeadProps {
 }
 
 export const FilterHead = ({ isInput, title }: FilterHeadProps) => {
+  const { inputData, status, gender, clearContext } =
+    useCharacterFilterContext()
+  const isFilterEmpty =
+    inputData.name === '' &&
+    inputData.species === '' &&
+    status === '' &&
+    gender === ''
   const { goBack, navigate } = useNavigation()
 
   return (
     <FilterHeadContainer>
-      <LeftButton isBack={isInput} onPress={() => goBack()}>
+      <LeftButton
+        isBack={isInput}
+        onPress={isInput ? () => goBack() : () => clearContext()}>
         {isInput && <BackIcon style={{ marginRight: 5 }} />}
-        <LeftButtonText isInput={isInput}>
+        <LeftButtonText isInput={isInput || !isFilterEmpty}>
           {isInput ? 'Back' : 'Clear'}
         </LeftButtonText>
       </LeftButton>
       <FilterTitle>{title}</FilterTitle>
       {!isInput && (
         <ApplyButton
-          onPress={() => navigate(Routes.CharacterScreen, { filter: true })}>
+          onPress={() =>
+            navigate(Routes.CharacterScreen, { filter: !isFilterEmpty })
+          }>
           <ApplyButtonText>APPLY</ApplyButtonText>
         </ApplyButton>
       )}

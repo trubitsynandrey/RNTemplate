@@ -218,6 +218,7 @@ export type GetCharactersQuery = {
 
 export type GetCharVarQueryVariables = Exact<{
   page: InputMaybe<Scalars['Int']>
+  filter: InputMaybe<FilterCharacter>
 }>
 
 export type GetCharVarQuery = {
@@ -231,6 +232,9 @@ export type GetCharVarQuery = {
       name: string
       image: string
       status: string
+      gender: string
+      type: string
+      species: string
     }>
   }
 }
@@ -316,8 +320,8 @@ export type GetCharactersQueryResult = Apollo.QueryResult<
   GetCharactersQueryVariables
 >
 export const GetCharVarDocument = gql`
-  query GetCharVar($page: Int) {
-    characters(page: $page) {
+  query GetCharVar($page: Int, $filter: FilterCharacter) {
+    characters(page: $page, filter: $filter) {
       info {
         next
       }
@@ -326,6 +330,9 @@ export const GetCharVarDocument = gql`
         name
         image
         status
+        gender
+        type
+        species
       }
     }
   }
@@ -344,6 +351,7 @@ export const GetCharVarDocument = gql`
  * const { data, loading, error } = useGetCharVarQuery({
  *   variables: {
  *      page: // value for 'page'
+ *      filter: // value for 'filter'
  *   },
  * });
  */

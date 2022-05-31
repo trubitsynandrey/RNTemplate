@@ -17,6 +17,7 @@ interface Values {
       species: string
     }>
   >
+  clearContext: () => void
 }
 
 const initialValues: Values = {
@@ -29,6 +30,7 @@ const initialValues: Values = {
   setStatus: noop,
   setGender: noop,
   setInputData: noop,
+  clearContext: noop,
 }
 
 const CharacterFilterContext = createContext(initialValues)
@@ -38,9 +40,16 @@ interface Props {
 }
 
 export const CharacterFilterProvider = ({ children }: Props) => {
-  const [inputData, setInputData] = useState({ name: '', species: '' })
+  const initialInputData = { name: '', species: '' }
+  const [inputData, setInputData] = useState(initialInputData)
   const [status, setStatus] = useState('')
   const [gender, setGender] = useState('')
+
+  const clearContext = () => {
+    setInputData(initialInputData)
+    setStatus('')
+    setGender('')
+  }
 
   const value = {
     status,
@@ -49,6 +58,7 @@ export const CharacterFilterProvider = ({ children }: Props) => {
     setGender,
     inputData,
     setInputData,
+    clearContext,
   }
 
   return (
