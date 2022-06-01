@@ -10,7 +10,18 @@ const FilterButtonContainer = styled(TouchableOpacity)`
   position: absolute;
   right: 16px;
   top: 60px;
+  flex-direction: row;
+  align-items: center;
 `
+
+const AppliedFilterIndicator = styled(View)`
+  height: 12px;
+  width: 12px;
+  border-radius: 50px;
+  background-color: ${colors.purple};
+  margin-right: 6px;
+`
+
 const ButtonText = styled(Text)`
   font-family: 'Roboto-Black';
   font-size: 17px;
@@ -34,15 +45,20 @@ const TitleRouter = styled(Text)`
 `
 interface CustomHeaderProps {
   title: string
+  isFilterApplied?: boolean
 }
 
-export const CustomHeader = ({ title }: CustomHeaderProps) => {
+export const CustomHeader = ({
+  title,
+  isFilterApplied = false,
+}: CustomHeaderProps) => {
   const { navigate } = useNavigation()
 
   return (
     <HeaderContainer>
       <TitleRouter>{title}</TitleRouter>
       <FilterButtonContainer onPress={() => navigate(Routes.FilterModal)}>
+        {isFilterApplied && <AppliedFilterIndicator />}
         <ButtonText>Filter</ButtonText>
       </FilterButtonContainer>
     </HeaderContainer>

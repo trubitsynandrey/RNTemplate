@@ -1,5 +1,4 @@
 import React from 'react'
-import { StatusBar } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { CharacterScreen } from 'src/modules/character'
@@ -31,7 +30,12 @@ export const TabBar = () => {
           component={CharacterScreen}
           options={{
             title: 'Character',
-            header: () => <CustomHeader title={'Character'} />,
+            header: ({ route }) => (
+              <CustomHeader
+                title={'Character'}
+                isFilterApplied={route?.params?.filter}
+              />
+            ),
             tabBarIcon: ({ focused }) => <CharacterIcon focused={focused} />,
           }}
         />

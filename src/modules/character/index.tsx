@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { FlatList, SafeAreaView, StatusBar, Text } from 'react-native'
+import { useFocusEffect, useRoute } from '@react-navigation/native'
 import styled from 'styled-components'
 
 import { useGetCharVarQuery } from 'src/generated/graphql'
 import { useGetCharactersQuery } from 'src/generated/graphql'
 import { colors } from 'src/theme/colors'
 
+import { useCharacterFilterContext } from '../filter/filter-character-context'
 import { CharacterCard } from './character-card'
 
 const CardsContainer = styled(SafeAreaView)`
@@ -17,9 +19,25 @@ const CardsContainer = styled(SafeAreaView)`
 `
 
 export const CharacterScreen = () => {
-  const { data, loading, fetchMore } = useGetCharVarQuery()
+  const { inputData, status, gender } = useCharacterFilterContext()
+
+  const { data, loading, fetchMore, refetch } = useGetCharVarQuery()
 
   const page = data?.characters.info.next
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch({
+        filter: {
+          name: inputData.name,
+          gender,
+          status,
+          species: inputData.species,
+          type: '',
+        },
+      })
+    }, [refetch, inputData.name, inputData.species, gender, status]),
+  )
 
   if (loading) {
     return <Text>Loading...</Text>
@@ -34,12 +52,13 @@ export const CharacterScreen = () => {
           keyExtractor={(item) => item.id}
           numColumns={2}
           onEndReached={() => {
-            console.log('reached')
-            fetchMore({
-              variables: {
-                page,
-              },
-            })
+            if (page) {
+              fetchMore({
+                variables: {
+                  page,
+                },
+              })
+            }
           }}
           renderItem={({ item }) => (
             <CharacterCard

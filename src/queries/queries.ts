@@ -14,8 +14,8 @@ export const CHARACTERS = gql`
 `
 
 export const CHARACTERSBYPAGE = gql`
-  query GetCharVar($page: Int) {
-    characters(page: $page) {
+  query GetCharVar($page: Int, $filter: FilterCharacter) {
+    characters(page: $page, filter: $filter) {
       info {
         next
       }
@@ -24,6 +24,9 @@ export const CHARACTERSBYPAGE = gql`
         name
         image
         status
+        gender
+        type
+        species
       }
     }
   }

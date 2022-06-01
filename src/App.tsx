@@ -6,6 +6,7 @@ import { RootNavigation } from 'src/navigation/root'
 
 import { Characters } from './generated/graphql'
 import { AlertProvider } from './modules/alert-context'
+import { CharacterFilterProvider } from './modules/filter/filter-character-context'
 
 const client = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql',
@@ -35,11 +36,13 @@ const client = new ApolloClient({
 export const App = () => {
   return (
     <ApolloProvider client={client}>
-      <AlertProvider>
-        <NavigationContainer>
-          <RootNavigation />
-        </NavigationContainer>
-      </AlertProvider>
+      <CharacterFilterProvider>
+        <AlertProvider>
+          <NavigationContainer>
+            <RootNavigation />
+          </NavigationContainer>
+        </AlertProvider>
+      </CharacterFilterProvider>
     </ApolloProvider>
   )
 }
