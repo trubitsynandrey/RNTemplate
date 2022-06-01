@@ -43,7 +43,6 @@ interface InputButtonProps {
   value?: string
   setValue?: (item: string) => void
   isInputValue?: boolean
-  setChecked?: () => void
 }
 
 export const InputButton = ({
@@ -53,7 +52,6 @@ export const InputButton = ({
   setValue,
   value,
   isInputValue,
-  setChecked,
 }: InputButtonProps) => {
   const handleOnPress = () => {
     // setIsChecked(!isChecked)
@@ -81,7 +79,7 @@ export const InputButton = ({
       onPress={isCheckType ? handleOnPress : handleNavigate}>
       <Checkbox
         isChecked={isChecked || isInputValue}
-        onPress={isCheckType ? handleOnPress : console.log('not implemented')}
+        onPress={isCheckType ? handleOnPress : handleNavigate}
       />
       <DescriptionButtonWrapper>
         {isCheckType ? (
